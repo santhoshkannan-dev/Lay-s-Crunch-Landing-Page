@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lay's Crunch Experience | 3D Flavor Showcase</title>
+  <link rel="icon" type="image/png" href="/packs/classic.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+  <!-- Cinematic Preloader -->
+  <div id="preloader">
+    <div class="preloader-spices" id="preloader-spices"></div>
+    <div class="preloader-center">
+      <div class="preloader-chip-wrap">
+        <div id="preloader-chip"></div>
+      </div>
+      <div id="preloader-counter">0%</div>
+      <div id="preloader-status">INITIALIZING FLAVOR VAULT...</div>
+    </div>
+  </div>
+
+  <!-- Dynamic Radial Concentric Rings Background (Hero & Story Backdrop) -->
+  <div class="hero-rings-backdrop" id="hero-rings">
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+    <div class="hero-ring"></div>
+  </div>
+
+  <!-- Fixed 3D WebGL Canvas Layer -->
+  <div id="webgl-container"></div>
+
+  <!-- Site Header & Floating Controls -->
+  <header class="site-header">
+    <a href="#flavors" class="brand-badge">
+      <svg class="lays-logo-pill" viewBox="0 0 100 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="23" r="22" fill="#F5B800" stroke="#FFE866" stroke-width="2"/>
+        <path d="M22 23 C22 17, 34 11, 50 11 C66 11, 78 17, 78 23 C78 29, 66 35, 50 35 C34 35, 22 29, 22 23 Z" fill="#D32F2F"/>
+        <text x="50" y="27" font-family="'Archivo Black', sans-serif" font-size="14" fill="#ffffff" font-style="italic" font-weight="900" text-anchor="middle">Lay's</text>
+      </svg>
+      <span class="brand-label">CRUNCH LAB</span>
+    </a>
+
+    <nav class="nav-pill" id="site-nav">
+      <a href="#flavors" class="nav-link active" data-section="flavors">Flavors</a>
+      <a href="#inside" class="nav-link" data-section="inside">Inside</a>
+      <a href="#shop" class="nav-link" data-section="shop">Shop</a>
+      <a href="#range" class="nav-link" data-section="range">Range</a>
+      <a href="#qa" class="nav-link" data-section="qa">Q&A</a>
+      <a href="#join" class="nav-link" data-section="join">Join</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn-pill-icon" id="sound-toggle-btn" aria-label="Toggle Sound">
+        <span id="sound-status-icon">...</span>
+        <span id="sound-status-text">OFF</span>
+      </button>
+
+      <button class="btn-pill-icon" id="cart-drawer-btn" aria-label="Open Cart">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span id="cart-counter-text">000</span>
+      </button>
+
+      <a href="#join" class="btn-cta-first-dibs">First dibs</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO FLAVORS CAROUSEL SECTION (SCREEN 1) -->
+    <section class="hero-section" id="flavors">
+      <div class="corner-cross cross-tl">+</div>
+      <div class="corner-cross cross-tr">+</div>
+      <div class="corner-cross cross-bl">+</div>
+      <div class="corner-cross cross-br">+</div>
+
+      <div class="hero-hints">
+        + DRAG TO BROWSE &bull; CLICK TO ZOOM &bull; 🌶️ SCROLL TO EXPLORE
+      </div>
+
+      <div class="hero-carousel-controls">
+        <button class="hero-arrow-btn" id="hero-prev-btn" aria-label="Previous Flavor">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="hero-arrow-btn" id="hero-next-btn" aria-label="Next Flavor">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="hero-title-wrap">
+        <h1 class="hero-flavor-title" id="hero-title">FLAMIN'<br>HOT</h1>
+      </div>
+
+      <div class="hero-bottom-bar">
+        <div class="hero-corner-left"></div>
+
+        <div class="hero-corner-right">
+          <div class="hero-outline-number" id="hero-outline-num">05</div>
+          <button class="hero-autoplay-toggle" id="hero-autoplay-btn">
+            <span id="autoplay-indicator">||</span> AUTOPLAY
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. INSIDE STORY SECTION (SCREEN 2) -->
+    <section class="inside-section" id="inside">
+      <div class="corner-cross cross-tl">+</div>
+      <div class="corner-cross cross-tr">+</div>
+      <div class="corner-cross cross-bl">+</div>
+      <div class="corner-cross cross-br">+</div>
+
+      <!-- Concentric graphic target rings behind the 3D bag -->
+      <div class="story-bag-halo">
+        <div class="halo-circle halo-circle-1"></div>
+        <div class="halo-circle halo-circle-2"></div>
+        <div class="halo-circle halo-circle-3"></div>
+        <div class="halo-brackets"></div>
+      </div>
+
+      <div class="inside-container">
+        <div class="story-left-column">
+          <div class="story-bar-wrapper">
+            <span>01</span>
+            <div class="story-bar-track">
+              <div class="story-bar-fill" id="story-chapter-bar"></div>
+            </div>
+            <span>04</span>
+          </div>
+
+          <div class="story-chapter-tag" id="story-chapter-tag">— CHAPTER 01 — THE BAG</div>
+          <h2 class="story-chapter-title" id="story-chapter-title">BUILT TO PROTECT</h2>
+          <p class="story-chapter-body" id="story-chapter-body">
+            A pillow of air cushions every chip, while a foil-lined film keeps out light and moisture until the moment you tear it open.
+          </p>
+        </div>
+
+        <!-- Hotspot callouts positioned on the 3D Bag -->
+        <div class="story-hotspots-layer" id="story-hotspots">
+          <!-- Hotspot 1: Heat-sealed crimp -->
+          <div class="story-hotspot hotspot-1">
+            <div class="hotspot-pin">
+              <div class="hotspot-pulse"></div>
+              <div class="hotspot-dot"></div>
+            </div>
+            <div class="hotspot-card">
+              <div class="hotspot-title">HEAT-SEALED CRIMP</div>
+              <div class="hotspot-desc">Locks the freshness in</div>
+            </div>
+          </div>
+
+          <!-- Hotspot 2: Foil-lined film -->
+          <div class="story-hotspot hotspot-2">
+            <div class="hotspot-card">
+              <div class="hotspot-title">FOIL-LINED FILM</div>
+              <div class="hotspot-desc">Blocks light & moisture</div>
+            </div>
+            <div class="hotspot-pin">
+              <div class="hotspot-pulse"></div>
+              <div class="hotspot-dot"></div>
+            </div>
+          </div>
+
+          <!-- Hotspot 3: Air cushion -->
+          <div class="story-hotspot hotspot-3">
+            <div class="hotspot-card">
+              <div class="hotspot-title">AIR CUSHION</div>
+              <div class="hotspot-desc">Keeps every chip whole</div>
+            </div>
+            <div class="hotspot-pin">
+              <div class="hotspot-pulse"></div>
+              <div class="hotspot-dot"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chapter HUD Nav on the Right (Matching Screenshot 2) -->
+        <div class="story-right-hud">
+          <div class="story-big-num">01</div>
+          
+          <div class="chapter-active-pill">
+            <span class="chapter-active-num" id="chapter-active-num">01 THE BAG</span>
+            <span class="chapter-active-title" id="chapter-active-title">Air-cushioned pack</span>
+            <div style="width: 28px; height: 28px; background: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+              </svg>
+            </div>
+          </div>
+
+          <div class="chapter-hud-track">
+            <div class="chapter-hud-line"></div>
+            <div class="chapter-nav-dot active" data-index="0" title="The Bag">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="5" y="2" width="14" height="20" rx="3"></rect>
+              </svg>
+            </div>
+            <div class="chapter-nav-dot" data-index="1" title="The Crunch">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 10s3-3 5-3 5 6 7 6 5-3 7-3"></path>
+                <path d="M2 14s3-3 5-3 5 6 7 6 5-3 7-3"></path>
+              </svg>
+            </div>
+            <div class="chapter-nav-dot" data-index="2" title="The Seasoning">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="8" cy="8" r="2.5"></circle>
+                <circle cx="16" cy="8" r="1.5"></circle>
+                <circle cx="12" cy="16" r="2"></circle>
+              </svg>
+            </div>
+            <div class="chapter-nav-dot" data-index="3" title="The Potato">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <ellipse cx="12" cy="12" rx="9" ry="7"></ellipse>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SHOP SECTION (SCREEN 3 & 4) -->
+    <section class="shop-section" id="shop">
+      <div class="shop-wall-header">
+        <div>
+          <div class="shop-wall-tag">THE WALL &mdash; PICK A BAG, ANY BAG</div>
+          <h2 class="shop-wall-title">GRAB<br>A BAG</h2>
+        </div>
+        <p class="shop-wall-subtitle">
+          Tilt a card, press it, poke the bag. Hit <strong>+</strong> to drop a flavor into your box.
+        </p>
+      </div>
+
+      <div class="shop-wall-grid" id="shop-wall-grid"></div>
+
+      <!-- Build-A-Box Concept Store (Screen 4) -->
+      <div class="build-box-section" id="build-a-box">
+        <div class="box-store-tag">CRUNCH LAB &bull; BUILD-A-BOX &mdash; CONCEPT STORE</div>
+        <div class="build-box-layout">
+          <div class="box-info-column">
+            <h3 class="box-headline">
+              BUILD YOUR<br>
+              <span class="box-headline-pill">3 PACK &</span><br>
+              SAVE $1.49
+            </h3>
+
+            <div class="box-flavor-picker" id="box-flavor-picker"></div>
+          </div>
+
+          <div class="box-tray-column">
+            <div class="box-tray-radar" id="box-tray-radar">
+              <div class="radar-ring-inner"></div>
+              <div class="box-tray-bags" id="box-tray-bags"></div>
+            </div>
+
+            <div class="box-checkout-bar">
+              <button class="btn-add-basket" id="box-add-basket-btn" disabled>
+                <span>ADD TO BASKET</span>
+                <span>
+                  <span class="box-price-crossed">$7.47</span>
+                  <strong>$5.98</strong>
+                </span>
+              </button>
+              
+              <div class="box-footers-row">
+                <span>TAP A BAG &mdash; OR DRAG IT INTO THE TRAY</span>
+                <span>CONCEPT ONLY &mdash; NOTHING IS CHARGED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. RANGE / THE RACK SECTION (SCREEN 6) -->
+    <section class="rack-section" id="range">
+      <div class="rack-header">
+        <div>
+          <div class="hero-hints" style="margin-bottom: 8px;">THE RACK &mdash; 09 FLAVORS</div>
+          <h2 class="rack-title">PICK YOUR<br>CRUNCH</h2>
+        </div>
+        <p class="rack-subtitle">
+          Drag the rail to browse. Run your cursor through the bags. Tap one to spin it on its hook.
+        </p>
+      </div>
+
+      <div class="rack-overhead-bar"></div>
+      <div class="rack-rail-container" id="rack-rail"></div>
+
+      <!-- Scrubber Dial -->
+      <div class="rack-dial-wrapper">
+        <div class="rack-dial-track" id="rack-dial"></div>
+        <div class="rack-dial-needle" id="rack-dial-needle"></div>
+        <div class="rack-dial-footer">
+          <span id="rack-current-count">03 / 09</span>
+          <span>DRAG THE WHEEL</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Q&A SECTION -->
+    <section class="qa-section" id="qa">
+      <div class="qa-container">
+        <h2 class="qa-title">CRUNCH LAB &bull; Q&A</h2>
+        <div class="qa-list">
+          <div class="qa-item">
+            <div class="qa-question">
+              Why are Lay's bags filled with air?
+              <span class="qa-icon">+</span>
+            </div>
+            <div class="qa-answer">
+              It's actually 100% pure food-grade nitrogen! Nitrogen creates an oxygen-free cushion that prevents the chips from shattering during shipment while locking out humidity so every chip stays as fresh and crispy as the second it left the kettle.
+            </div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-question">
+              How is the 63-decibel crunch calibrated?
+              <span class="qa-icon">+</span>
+            </div>
+            <div class="qa-answer">
+              Potato moisture is continuously measured with laser spectroscopy down to 1.8% hydration. This micro-porous cellular structure fractures at high frequency upon bite, producing an acoustic soundwave calibrated for peak sensory gratification.
+            </div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-question">
+              Where are the potatoes sourced?
+              <span class="qa-icon">+</span>
+            </div>
+            <div class="qa-answer">
+              Every single potato is grown on generational family farms across 25 U.S. states. From field to kettle cooking, the journey takes less than 24 hours to guarantee maximum potato flavor.
+            </div>
+          </div>
+
+          <div class="qa-item">
+            <div class="qa-question">
+              How does the electrostatic seasoning work?
+              <span class="qa-icon">+</span>
+            </div>
+            <div class="qa-answer">
+              Our seasoning spices are micro-charged with static ions as they enter the tumbling drum. Oppositely charged potato slices naturally attract the spice particles evenly across every curve, avoiding bare spots or heavy clumps.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. JOIN SECTION -->
+    <section class="join-section" id="join">
+      <div class="join-headline">GET FIRST DIBS</div>
+      <p class="join-sub">
+        Join the Crunch Lab Tasting Circle for secret flavor drops, limited-edition runs, and invitation-only tastings delivered to your doorstep.
+      </p>
+      <form class="join-form" onsubmit="event.preventDefault(); alert('Welcome to the Crunch Lab Tasting Circle!');">
+        <input type="email" placeholder="Enter your email" class="join-input" required />
+        <button type="submit" class="join-btn">JOIN</button>
+      </form>
+      <div class="site-footer-bar">
+        <span>&copy; 2026 LAY'S CRUNCH LAB. FAN & PORTFOLIO EXPERIENCE.</span>
+        <span>THREE.JS &bull; GSAP &bull; LENIS</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- Slide-out Cart Drawer -->
+  <aside class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <h3 class="cart-title">BASKET</h3>
+      <button class="cart-close-btn" id="cart-close-btn">&times;</button>
+    </div>
+    <div class="cart-items-list" id="cart-items-list">
+      <div style="opacity: 0.6; text-align: center; margin-top: 40px;">Your basket is empty. Add a flavor box to begin!</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>TOTAL</span>
+        <span id="cart-total-price">$0.00</span>
+      </div>
+      <button class="btn-checkout" id="checkout-btn">CHECKOUT (CONCEPT)</button>
+    </div>
+  </aside>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
